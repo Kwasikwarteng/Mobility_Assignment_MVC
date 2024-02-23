@@ -110,6 +110,21 @@ namespace Mobility_Assignment_MVC.Controllers
                                     .Where(p => p.First_Name.Contains(searchTerm) || p.Last_Name.Contains(searchTerm))
                                     .ToList();
 
+            // Redirect to the GET action method to display the search results
+            return RedirectToAction("SearchResults", new { searchTerm = searchTerm });
+
+
+        }
+
+        [HttpGet]
+        public IActionResult SearchResults(string searchTerm)
+        {
+            // Perform the search operation based on the searchTerm
+            // For example, if you're searching for a person by name:
+            var searchResults = _applicationDbContext.Persons
+                                    .Where(p => p.First_Name.Contains(searchTerm) || p.Last_Name.Contains(searchTerm))
+                                    .ToList();
+
             // Pass the search results to the view
             return View(searchResults);
         }
