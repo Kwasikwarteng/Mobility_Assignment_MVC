@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Mobility_Assignment_MVC.Models.Person>
+@{
+    ViewData["Title"] = "List";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Person List</h2>
+        </div>
+    </div>
+
+    <br /><br />
+    @if(Model.Count() > 0)
+    {
+        <table class="table table-bordered table-striped" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Age</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach(var obj in Model)
+                {
+                    <tr>
+                        <td>@obj.First_Name</td>
+                        <td>@obj.Last_Name</td>
+                        <td>@obj.Age</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No Data Exists!!</p>
+    }
+</div>
+
