@@ -31,7 +31,8 @@
         </nav> *@
         <nav class="nav flex-column">
             <a class="nav-link" asp-area="" asp-controller="LinkEntity" asp-action="Index">Link Entity</a>
-            <a class="nav-link" href="#">Web Service</a>
+            <a class="nav-link" asp-area="" asp-controller="WebServiceHome" asp-action="Index">Web Service</a>
+            @* <a class="nav-link" href="@Url.Action("Index", "WebServiceHome", new { area = "" })">Web Service</a> *@
         </nav>
     </header>
     <div class="container">
