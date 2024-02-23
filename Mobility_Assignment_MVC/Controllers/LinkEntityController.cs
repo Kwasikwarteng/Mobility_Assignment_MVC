@@ -33,6 +33,7 @@ namespace Mobility_Assignment_MVC.Controllers
                 _applicationDbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
+            TempData["SuccessMessage"] = "Person deleted successfully.";
             return View(person);
         }
 
@@ -52,13 +53,20 @@ namespace Mobility_Assignment_MVC.Controllers
                 var person = _applicationDbContext.Persons.FirstOrDefault(x => x.First_Name == firstName && x.Last_Name == lastName);
                 if (person != null)
                 {
-                    return View("DeleteConfirmation", person);
+                    return View("ConfirmDelete", person);
                 }
                 else
                 {
                     ViewBag.ErrorMessage = "Person not found!";
                 }
             }
+            return View();
+        }
+
+        //Get - Delete Record
+        [HttpGet]
+        public IActionResult ConfirmDelete()
+        {
             return View();
         }
 
@@ -75,6 +83,8 @@ namespace Mobility_Assignment_MVC.Controllers
             _applicationDbContext.Persons.Remove(personToDelete);
             _applicationDbContext.SaveChanges();
 
+            TempData["SuccessMessage"] = "Person deleted successfully.";
+
             return RedirectToAction("Index");
         }
         //Get List of People
@@ -82,6 +92,26 @@ namespace Mobility_Assignment_MVC.Controllers
         {
             IEnumerable<Person> personsList = _applicationDbContext.Persons;
             return View(personsList);
+        }
+
+        //Get - Delete Record
+        [HttpGet]
+        public IActionResult Search()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Search(string searchTerm)
+        {
+            // Perform the search operation based on the searchTerm
+            // For example, if you're searching for a person by name:
+            var searchResults = _applicationDbContext.Persons
+                                    .Where(p => p.First_Name.Contains(searchTerm) || p.Last_Name.Contains(searchTerm))
+                                    .ToList();
+
+            // Pass the search results to the view
+            return View(searchResults);
         }
 
 

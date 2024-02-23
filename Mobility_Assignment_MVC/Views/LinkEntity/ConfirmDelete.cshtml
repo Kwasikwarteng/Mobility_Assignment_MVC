@@ -1,0 +1,31 @@
+﻿<h1>ConfirmDelete</h1>
+
+<h2>Delete Confirmation</h2>
+<p>Are you sure you want to delete the following person?</p>
+<div class="container">
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">Delete Confirmation</h2>
+            <p class="card-text">Are you sure you want to delete the following person?</p>
+            <dl class="row">
+                <dt class="col-sm-3">First Name:</dt>
+                <dd class="col-sm-9">@Model.First_Name</dd>
+                <dt class="col-sm-3">Last Name:</dt>
+                <dd class="col-sm-9">@Model.Last_Name</dd>
+                <!-- Add more details if needed -->
+            </dl>
+            <form asp-action="ConfirmDelete" method="post">
+                <input type="hidden" name="id" value="@Model.PersonId" />
+                <button type="submit" class="btn btn-danger">Confirm Delete</button>
+                <a asp-action="Delete" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>

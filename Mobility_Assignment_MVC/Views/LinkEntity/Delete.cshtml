@@ -1,8 +1,4 @@
 ﻿@model Mobility_Assignment_MVC.Models.Person
-@{
-    ViewData["Title"] = "Delete";
-}
-
 <div class="border p-3">
     <div class="row">
         <h2>Delete Person</h2>
@@ -18,22 +14,5 @@
             </div>
             <button type="submit" class="btn btn-primary">Search</button>
         </form>
-
-        @if (Model != null)
-        {
-            <h3>Search Result:</h3>
-            <p>Name: @Model.First_Name</p>
-            <p>Surname: @Model.Last_Name</p>
-            <p>Age: @Model.Age</p>
-            <form asp-action="ConfirmDelete" method="post">
-                <input type="hidden" name="id" value="@Model.PersonId" />
-                <button type="submit" class="btn btn-danger">Confirm Delete</button>
-                <a asp-action="Delete" class="btn btn-secondary">Cancel</a>
-            </form>
-        }
-        else if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
-        {
-            <p>@ViewBag.ErrorMessage</p>
-        }
     </div>
 </div>
