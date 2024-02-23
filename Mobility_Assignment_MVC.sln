@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobility_Assignment_MVC", "Mobility_Assignment_MVC\Mobility_Assignment_MVC.csproj", "{870F3187-A7EC-4725-9555-99B4B77CA23C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebService", "WebService\WebService.csproj", "{43F918BD-605C-426D-8C80-EDA2D1978C51}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{870F3187-A7EC-4725-9555-99B4B77CA23C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{870F3187-A7EC-4725-9555-99B4B77CA23C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{870F3187-A7EC-4725-9555-99B4B77CA23C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43F918BD-605C-426D-8C80-EDA2D1978C51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43F918BD-605C-426D-8C80-EDA2D1978C51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43F918BD-605C-426D-8C80-EDA2D1978C51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43F918BD-605C-426D-8C80-EDA2D1978C51}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
