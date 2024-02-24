@@ -7,9 +7,14 @@ namespace Mobility_Assignment_MVC.Controllers
     public class LinkEntityController : Controller
     {
         private readonly ApplicationDbContext _applicationDbContext;
-        public LinkEntityController(ApplicationDbContext applicationDbContext)
+        private readonly HttpClient _httpClient;
+        public LinkEntityController(ApplicationDbContext applicationDbContext, IHttpClientFactory httpClientFactory)
         {
             _applicationDbContext = applicationDbContext;
+            _httpClient = httpClientFactory.CreateClient();
+            _httpClient.BaseAddress = new Uri("https://localhost:7272/swagger/index.html");
+            _httpClient.DefaultRequestHeaders.Accept.Clear();
+            _httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
         }
         public IActionResult Index()
         {
@@ -129,6 +134,33 @@ namespace Mobility_Assignment_MVC.Controllers
             return View(searchResults);
         }
 
+        public async Task<IActionResult> AddRecordViaAPI(Person person)
+        {
+            try
+            {
+                var response = await _httpClient.PostAsJsonAsync("api/WebServiceHome/AddRecord", person);
 
+                if (response.IsSuccessStatusCode)
+                {
+                    // Record added successfully
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    // Handle failure scenario
+                    // You might want to log the error or display an error message to the user
+                    TempData["ErrorMessage"] = "Failed to add record via API.";
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions
+                TempData["ErrorMessage"] = $"An error occurred: {ex.Message}";
+            }
+
+            return RedirectToAction("Add"); // Redirect back to the add record page
+        }
     }
+
+
 }
