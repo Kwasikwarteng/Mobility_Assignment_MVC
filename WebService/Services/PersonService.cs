@@ -1,19 +1,19 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Mobility_Assignment_MVC.Models;
 using Mobility_Assignment_MVC.Models.Data;
-using WebService.Services.Interfaces;
+using WebService.Services.IServices;
 
 namespace WebService.Services
 {
-    public class WebService : IWebService
+    public class PersonService : IPersonService
     {
         private readonly WebServiceDbContext _dbContext;
-        public WebService(WebServiceDbContext dbContext)
+        public PersonService(WebServiceDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        //List
+        //Get All
         public async Task<IEnumerable<Person>> GetPeopleAsync()
         {
             var people = await _dbContext.Persons.ToListAsync();
@@ -43,8 +43,7 @@ namespace WebService.Services
         {
             try
             {
-                var budgetItem = _dbContext.Persons.Add(person);
-
+                var personItem = _dbContext.Persons.Add(person);
                 await _dbContext.SaveChangesAsync();
 
             }
@@ -55,9 +54,10 @@ namespace WebService.Services
             }
         }
 
-        public async Task SearchAsync(string name)
+        public async Task<Person> SearchAsync(string firstName, string lastName)
         {
-
+            var person = await _dbContext.Persons.FirstOrDefaultAsync(x => x.First_Name == firstName && x.Last_Name == lastName);
+            return person;
         }
     }
 }

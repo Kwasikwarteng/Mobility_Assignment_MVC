@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Mobility_Assignment_MVC.Models;
-using WebService.Services.Interfaces;
+using WebService.Services.IServices;
 
 namespace WebService.Controllers
 {
@@ -8,46 +8,48 @@ namespace WebService.Controllers
     [ApiController]
     public class WebServiceHomeController : ControllerBase
     {
-        private readonly IWebService _webService;
-        public WebServiceHomeController(IWebService webService)
+        private readonly IPersonService _webService;
+        public WebServiceHomeController(IPersonService webService)
         {
             _webService = webService;
         }
 
         // POST: api/WebServiceHome/AddRecord
         [HttpPost("AddRecord")]
-        public IActionResult AddRecord([FromBody] Person person)
+        public async Task<IActionResult> AddRecord([FromBody] Person person)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            _webService.AddAsync(person);
+            await _webService.AddAsync(person);
             return Ok();
         }
 
         // DELETE: api/WebServiceHome/DeleteRecord/{name}
         [HttpDelete("DeleteRecord/{id}")]
-        public IActionResult DeleteRecord(int id)
+        public async Task<IActionResult> DeleteRecord(int id)
         {
-            _webService.DeleteAsync(id);
-            return Ok();
+            try
+            {
+                await _webService.DeleteAsync(id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         // GET: api/WebServiceHome/ListRecords
         [HttpGet("ListRecords")]
-        public IActionResult ListRecords()
+        public async Task<IActionResult> ListRecords()
         {
-            var records = _webService.GetPeopleAsync();
+            var records = await _webService.GetPeopleAsync();
             return Ok(records);
         }
 
         // GET: api/WebServiceHome/SearchRecord/{name}
         [HttpGet("SearchRecord/{name}")]
-        public IActionResult SearchRecord(string name)
+        public IActionResult SearchRecord(string firstName, string lastName)
         {
-            var record = _webService.SearchAsync(name);
+            var record = _webService.SearchAsync(firstName, lastName);
             if (record == null)
             {
                 return NotFound();
