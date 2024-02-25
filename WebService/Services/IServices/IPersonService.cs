@@ -8,7 +8,7 @@ namespace WebService.Services.IServices
         Task DeleteAsync(int id);
         Task<Person> GetByIdAsync(int id);
         Task<IEnumerable<Person>> GetPeopleAsync();
-        Task SearchAsync(string name);
+       
         Task<Person> SearchAsync(string firstName, string lastName);
     }
 }

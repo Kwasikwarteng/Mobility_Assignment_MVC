@@ -47,9 +47,9 @@ namespace WebService.Controllers
 
         // GET: api/WebServiceHome/SearchRecord/{name}
         [HttpGet("SearchRecord/{name}")]
-        public IActionResult SearchRecord(string firstName, string lastName)
+        public async Task<IActionResult> SearchRecord(string firstName, string lastName)
         {
-            var record = _webService.SearchAsync(firstName, lastName);
+            var record = await _webService.SearchAsync(firstName, lastName);
             if (record == null)
             {
                 return NotFound();
