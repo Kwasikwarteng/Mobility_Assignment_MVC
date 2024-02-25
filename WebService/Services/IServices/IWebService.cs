@@ -1,6 +1,6 @@
 ﻿using Mobility_Assignment_MVC.Models;
 
-namespace WebService.Services.Interfaces
+namespace WebService.Services.IServices
 {
     public interface IWebService
     {

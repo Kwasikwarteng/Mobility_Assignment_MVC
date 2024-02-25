@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Mobility_Assignment_MVC.Models.Data;
+using WebService.Services.IServices;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +12,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
 //Inject DB service
 builder.Services.AddDbContext<WebServiceDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IWebService, WebService>();
 
 var app = builder.Build();
 
