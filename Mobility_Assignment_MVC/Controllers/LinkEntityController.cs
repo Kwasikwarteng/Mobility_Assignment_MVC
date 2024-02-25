@@ -134,31 +134,37 @@ namespace Mobility_Assignment_MVC.Controllers
             return View(searchResults);
         }
 
-        public async Task<IActionResult> AddRecordViaAPI(Person person)
+        //public async Task<IActionResult> AddRecordViaAPI(Person person)
+        //{
+        //    try
+        //    {
+        //        var response = await _httpClient.PostAsJsonAsync("api/WebServiceHome/AddRecord", person);
+
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            // Record added successfully
+        //            return RedirectToAction("Index");
+        //        }
+        //        else
+        //        {
+        //            // Handle failure scenario
+        //            // You might want to log the error or display an error message to the user
+        //            TempData["ErrorMessage"] = "Failed to add record via API.";
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Handle any exceptions
+        //        TempData["ErrorMessage"] = $"An error occurred: {ex.Message}";
+        //    }
+
+        //    return RedirectToAction("Add"); // Redirect back to the add record page
+        //}
+
+        public IActionResult WebService()
         {
-            try
-            {
-                var response = await _httpClient.PostAsJsonAsync("api/WebServiceHome/AddRecord", person);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    // Record added successfully
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    // Handle failure scenario
-                    // You might want to log the error or display an error message to the user
-                    TempData["ErrorMessage"] = "Failed to add record via API.";
-                }
-            }
-            catch (Exception ex)
-            {
-                // Handle any exceptions
-                TempData["ErrorMessage"] = $"An error occurred: {ex.Message}";
-            }
-
-            return RedirectToAction("Add"); // Redirect back to the add record page
+            // Redirect to the Web API endpoint or perform any other logic to access the API service
+            return Redirect("https://localhost:7272/swagger/index.html"); // Replace with your actual Web API URL
         }
     }
 
